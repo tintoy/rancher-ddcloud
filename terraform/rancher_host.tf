@@ -6,6 +6,8 @@ resource "ddcloud_server" "rancher_host" {
 	description				= "Rancher Host"
 	admin_password			= "${var.ssh_bootstrap_password}"
 
+	auto_start				= true
+
 	memory_gb				= 8
 	cpu_count				= 2
 	cpu_speed				= "STANDARD"
