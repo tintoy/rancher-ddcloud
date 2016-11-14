@@ -3,7 +3,7 @@
 *.tfstate.backup
 
 # Local-only variables
-local-vars.tf
+local-vars.json
 
 # Module directory
 .terraform/
