@@ -2,8 +2,12 @@
 *.tfstate
 *.tfstate.backup
 
+# Local-only variables
+local-vars.tf
+
 # Module directory
 .terraform/
 
 # Mac
 .DS_Store
+
