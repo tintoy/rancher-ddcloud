@@ -55,6 +55,24 @@ resource "ddcloud_firewall_rule" "rancher_host_ssh_in" {
 
 	networkdomain		= "${ddcloud_networkdomain.rancher.id}"
 }
+resource "ddcloud_firewall_rule" "rancher_host_ui_in" {
+	name				= "rancher.host.ui.inbound"
+	placement			= "first"
+	action				= "accept"
+	enabled				= true
+
+	ip_version			= "ipv4"
+	protocol			= "tcp"
+
+	source_address		= "${var.client_ip}"
+
+	destination_address	= "${ddcloud_nat.rancher_host.public_ipv4}"
+	destination_port	= 8080 # Rancher UI
+
+	networkdomain		= "${ddcloud_networkdomain.rancher.id}"
+
+	# depends_on			= [ "ddcloud_firewall_rule.rancher_host_ssh_in" ]
+}
 
 # Install an SSH key so that Ansible doesnt make us jump through hoops to authenticate.
 module "rancher_host_ssh" {

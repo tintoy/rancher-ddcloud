@@ -3,7 +3,7 @@ resource "ddcloud_networkdomain" "rancher" {
 	name		= "${var.networkdomain_name}"
 	description	= "Rancher on CloudControl."
 
-	datacenter	= "AU10"
+	datacenter	= "${var.datacenter}"
 }
 
 # The primary VLAN.

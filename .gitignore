@@ -8,6 +8,8 @@ local-vars.tf
 # Module directory
 .terraform/
 
+# Ansible retry
+*.retry
+
 # Mac
 .DS_Store
-

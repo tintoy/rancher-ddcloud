@@ -4,5 +4,4 @@
 - hosts: rancher
   roles:
     - docker
-
-  # TODO: Do we need to install Docker Machine on this host?
+    - rancher
