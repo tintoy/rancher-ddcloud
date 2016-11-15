@@ -1,4 +1,8 @@
 ---
+- name: set host name
+  hostname:
+    name: "{{ inventory_hostname }}"
+
 - name: apt-get update
   apt:
     update_cache: true
