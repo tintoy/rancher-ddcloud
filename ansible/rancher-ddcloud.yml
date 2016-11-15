@@ -8,4 +8,7 @@
 - hosts: role=rancher,role=worker
   roles:
     - docker
+
+- hosts: role=rancher
+  roles:
     - rancher
