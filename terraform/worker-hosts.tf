@@ -2,8 +2,8 @@
 resource "ddcloud_server" "worker" {
 	count					= "${var.worker_count}"
 
-	name					= "worker-${format("%02d", count.index)}"
-	description				= "Worker ${format("%02d", count.index)}"
+	name					= "worker-${format("%02d", count.index + 1)}"
+	description				= "Worker ${format("%02d", count.index + 1)}"
 	admin_password			= "${var.ssh_bootstrap_password}"
 
 	auto_start				= true

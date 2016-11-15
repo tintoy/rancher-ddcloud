@@ -19,3 +19,12 @@
     restart_policy: on-failure
     published_ports:
       - 8080:8080
+
+- name: create ssh keypair folder for rancher
+  command: "mkdir -p /root/rancher_keys"
+
+- name: generate ssh keypair for rancher
+  command: "ssh-keygen -f /root/rancher_keys/id_rsa -N ''"
+
+- name: install rancher ssh keypair
+  shell: "docker cp /root/rancher_keys/id_rsa rancher-server:/ && docker cp /root/rancher_keys/id_rsa.pub rancher-server:/"
