@@ -27,6 +27,11 @@ resource "ddcloud_server" "rancher_host" {
 	}
 
 	os_image_name			= "Ubuntu 14.04 2 CPU"
+
+	tag {
+		name                = "roles"
+		value				= "rancher"
+	}
 }
 
 # The Rancher host must be publicly accessible for provisioning.
