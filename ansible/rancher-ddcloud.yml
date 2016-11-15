@@ -1,7 +1,11 @@
 ---
 - include: "{{ playbook_dir }}/playbooks/check-requirements.yml"
 
-- hosts: rancher
+- hosts: all
+  roles:
+    - common
+
+- hosts: role=rancher,role=worker
   roles:
     - docker
     - rancher

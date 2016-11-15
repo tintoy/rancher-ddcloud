@@ -16,7 +16,11 @@ variable "ssh_bootstrap_password"	{ }
 #########
 # Globals
 
+# Target datacenter
 variable "datacenter" 				{ default = "AU10" }
+
+# Number of worker hosts
+variable "worker_count"				{ default = 3 }
 
 #########
 # Network
@@ -32,4 +36,10 @@ output "rancher_host_private_ip" {
 }
 output "rancher_host_public_ip" {
 	value = "${ddcloud_nat.rancher_host.public_ipv4}"
+}
+output "worker_private_ips" {
+	value = [ "${ddcloud_server.worker.*.primary_adapter_ipv4}" ]
+}
+output "worker_public_ips" {
+	value = [ "${ddcloud_nat.worker.*.public_ipv4}" ]
 }

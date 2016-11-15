@@ -3,7 +3,7 @@
 # All other host node provisioning is performed from this host (by Rancher) using docker-machine-driver-ddcloud.
 resource "ddcloud_server" "rancher_host" {
 	name					= "rancher"
-	description				= "Rancher Host"
+	description				= "Rancher host"
 	admin_password			= "${var.ssh_bootstrap_password}"
 
 	auto_start				= true
@@ -70,17 +70,27 @@ resource "ddcloud_firewall_rule" "rancher_host_ui_in" {
 	destination_port	= 8080 # Rancher UI
 
 	networkdomain		= "${ddcloud_networkdomain.rancher.id}"
-
-	# depends_on			= [ "ddcloud_firewall_rule.rancher_host_ssh_in" ]
 }
 
 # Install an SSH key so that Ansible doesnt make us jump through hoops to authenticate.
-module "rancher_host_ssh" {
-	source		= "github.com/DimensionDataResearch/ddcloud-ssh-key"
+resource "null_resource" "rancher_host_ssh" {
+	# Install our SSH public key.
+	provisioner "remote-exec" {
+		inline = [
+			"mkdir -p ~/.ssh",
+			"chmod 700 ~/.ssh",
+			"echo '${file(var.ssh_public_key_file)}' > ~/.ssh/authorized_keys",
+			"chmod 600 ~/.ssh/authorized_keys",
+			"passwd -d root"
+		]
 
-	host_ip		= "${ddcloud_nat.rancher_host.public_ipv4}"
+		connection {
+			type 		= "ssh"
+			
+			user 		= "root"
+			password 	= "${var.ssh_bootstrap_password}"
 
-	username	= "root"
-	password	= "${var.ssh_bootstrap_password}"
-	ssh_key		= "${file(var.ssh_public_key_file)}"
+			host 		= "${ddcloud_nat.rancher_host.public_ipv4}"
+		}
+	}
 }
