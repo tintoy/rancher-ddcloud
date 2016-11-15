@@ -1,9 +1,10 @@
 #!/usr/bin/env python2
 
 import json
+import socket
 import urllib2
 
-local_vars_path = './terraform/local-vars.json'
+local_vars_path = './terraform/local-vars.tf'
 
 def load_config():
   variables = {}
@@ -23,18 +24,16 @@ def load_config():
   return variables
 
 def save_config(variables):
-  with open(local_vars_path, 'w') as local_vars_file:
-    local_vars_data = {
-      'variable': {}
+  local_vars_data = {
+    'variable': {}
+  }
+  for name, value in variables.items():
+    local_vars_data['variable'][name] = {
+      'default': value
     }
-    for name, value in variables.items():
-      local_vars_data['variable'] = {
-        'name': {
-          'default': value
-        }
-      }
 
-    json.dump(local_vars_data, local_vars_file)
+  with open(local_vars_path, 'w') as local_vars_file:
+    json.dump(local_vars_data, local_vars_file, indent=2)
 
 def show_config(variables):
   if 'client_ip' in variables:
@@ -50,6 +49,27 @@ def show_config(variables):
       variables['ssh_bootstrap_password'])
     )
 
+def ask_variable(variables, key, prompt):
+  value = raw_input('{} (currently "{}"): '.format(
+    prompt, variables.get(key, '')
+  ))
+  if value != "":
+    local_vars[key] = value
+
+def detect_client_ip(variables):
+  request = urllib2.Request(
+    'http://{}/json'.format(
+      socket.gethostbyname('ifconfig.co') # We need the IPv4 address
+    ),
+    headers = {'Host': 'ifconfig.co'}
+  )
+
+  response = json.loads(
+    urllib2.urlopen(request).read()
+  )
+  
+  variables['client_ip'] = response['ip']
+
 local_vars = load_config()
 
 if len(local_vars) > 0:
@@ -61,10 +81,12 @@ print('=' * 80)
 print('')
 
 print('Detecting client IP...')
-response = json.loads(
-  urllib2.urlopen('http://ifconfig.co/json').read()
-)
-local_vars['client_ip'] = response['ip']
+detect_client_ip(local_vars)
+ask_variable(local_vars, 'client_ip', 'Client IP address')
+ask_variable(local_vars, 'ssh_public_key_file', 'SSH public key file')
+ask_variable(local_vars, 'ssh_bootstrap_password', 'SSH bootstrap password file')
+
+save_config(local_vars)
 
 print('')
 print('=' * 80)
