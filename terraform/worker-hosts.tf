@@ -41,33 +41,29 @@ resource "ddcloud_nat" "worker" {
 	networkdomain	= "${ddcloud_networkdomain.rancher.id}"
 	private_ipv4	= "${element(ddcloud_server.worker.*.primary_adapter_ipv4, count.index)}"
 }
-# AF: Uncomment and use this once v1.1.3 of the ddcloud provider for Terraform is released.
-#
-# resource "ddcloud_address_list" "workers" {
-# 	name			= "Workers"
-# 	ip_version		= "IPv4"
+resource "ddcloud_address_list" "workers" {
+	name			= "Workers"
+	ip_version		= "IPv4"
 
-# 	addresses = [ "${ddcloud_nat.worker.*.public_ipv4}" ]
+	addresses		= [ "${ddcloud_nat.worker.*.public_ipv4}" ]
 
-# 	networkdomain	= "${ddcloud_networkdomain.rancher.id}"
-# }
+	networkdomain	= "${ddcloud_networkdomain.rancher.id}"
+}
 resource "ddcloud_firewall_rule" "worker_ssh_in" {
-	count				= "${var.worker_count}"
+	name						= "worker.ssh.inbound"
+	placement					= "first"
+	action						= "accept"
+	enabled						= true
 
-	name				= "worker.${format("%02d", count.index)}.ssh.inbound"
-	placement			= "first"
-	action				= "accept"
-	enabled				= true
+	ip_version					= "ipv4"
+	protocol					= "tcp"
 
-	ip_version			= "ipv4"
-	protocol			= "tcp"
+	source_address				= "${var.client_ip}"
 
-	source_address		= "${var.client_ip}"
+	destination_address_list	= "${ddcloud_address_list.workers.id}"
+	destination_port			= 22 # SSH
 
-	destination_address	= "${element(ddcloud_nat.worker.*.public_ipv4, count.index)}"
-	destination_port	= 22 # SSH
-
-	networkdomain		= "${ddcloud_networkdomain.rancher.id}"
+	networkdomain				= "${ddcloud_networkdomain.rancher.id}"
 }
 
 # Install an SSH key so that Ansible doesnt make us jump through hoops to authenticate.
