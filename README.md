@@ -68,3 +68,5 @@ To enable the `ddcloud` driver:
 
 1. `ssh root@<rancher-host-public-ip>`
 2. `docker logs -f rancher-server`
+
+If you see errors in the log about shell detection, try changing the image name from "Ubuntu 14.04 2 CPU" to "CentOS 7 64-bit 2 CPU".
