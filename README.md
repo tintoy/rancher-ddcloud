@@ -63,3 +63,8 @@ To enable the `ddcloud` driver:
 2. In "Download URL", enter `https://azuretesting2.blob.core.windows.net/public/docker-machine-driver-ddcloud` then click Create.
 3. You can now go back to Infrastructure then Hosts
 4. If the hosts are being deployed onto the same VLAN as the Rancher host, make sure to the `usePrivateIp` checkbox is checked for each host you add.
+
+## Troubleshooting
+
+1. `ssh root@<rancher-host-public-ip>`
+2. `docker logs -f rancher-server`
