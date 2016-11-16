@@ -17,7 +17,7 @@ resource "aws_route53_record" "rancher_host" {
     ttl     = 60
     zone_id = "${var.dns_hosted_zone_id}"
 
-    name    = "${var.dns_subdomain_name}.${var.dns_domain_name}"
+    name    = "manage.${var.dns_subdomain_name}.${var.dns_domain_name}"
     records = ["${ddcloud_nat.rancher_host.public_ipv4}"]   
 }
 resource "aws_route53_record" "rancher_host_node" {
@@ -31,14 +31,12 @@ resource "aws_route53_record" "rancher_host_node" {
 
 # Workers
 resource "aws_route53_record" "worker" {
-	count	= "${var.worker_count}"
-
-    type    = "A"
+	type    = "A"
     ttl     = 60
     zone_id = "${var.dns_hosted_zone_id}"
 
-    name    = "${element(ddcloud_server.worker.*.name, count.index)}.${var.dns_subdomain_name}.${var.dns_domain_name}"
-    records = ["${element(ddcloud_nat.worker.*.public_ipv4, count.index)}"]   
+    name    = "${var.dns_subdomain_name}.${var.dns_domain_name}"
+    records = ["${ddcloud_nat.worker.*.public_ipv4}"]   
 }
 resource "aws_route53_record" "worker_node" {
 	count	= "${var.worker_count}"
