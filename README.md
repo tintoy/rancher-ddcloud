@@ -2,7 +2,7 @@
 
 Uses the [Docker Machine driver for CloudControl](https://github.com/DimensionDataResearch/docker-machine-driver-ddcloud) from within Rancher to create nodes.
 
-Since Cattle doesn't seem to work with IPv6, the orchestrator will have to be Kubernetes for now.
+Cattle, Swarm, and Kubernetes have been verified to work.
 
 ## Getting started
 
