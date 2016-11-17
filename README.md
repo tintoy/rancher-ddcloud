@@ -25,7 +25,7 @@ It might work on Windows, but I haven't tested it. If you have problems, try usi
 7. `terraform refresh`
 8. `terraform output`
 9. Note the Rancher and worker host IPs.
-10. cd ../ansible
+10. `cd ../ansible`
 11. `ansible-playbook playbooks/upgrade-packages.yml`
 12. `ansible-playbook rancher-ddcloud.yml`
 13. Open your web browser and navigate to `http://<rancher-host-public-ip>:8080/`
