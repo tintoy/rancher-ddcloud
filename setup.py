@@ -100,9 +100,10 @@ print('')
 print('=' * 80)
 print('')
 
-print('Detecting client IP...')
-detect_client_ip(local_vars)
 ask_variable(local_vars, 'client_ip', 'Client IP address')
+if 'client_ip' not in local_vars:
+  print('Detecting client IP...')
+  detect_client_ip(local_vars)
 ask_variable(local_vars, 'ssh_public_key_file', 'SSH public key file')
 ask_variable(local_vars, 'ssh_bootstrap_password', 'SSH bootstrap password file')
 ask_variable(local_vars, 'dns_domain_name', 'Top-level domain name')
