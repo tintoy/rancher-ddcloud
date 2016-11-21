@@ -17,7 +17,7 @@ It might work on Windows, but I haven't tested it. If you have problems, try usi
 * Your CloudControl credentials configured in the `MCP_USER` and `MCP_PASSWORD` environment variables
 
 1. Edit [terraform/main.tf](terraform/main.tf) to configure target data center, etc
-2. Run `./setup.py`
+2. Run `./setup.py` (if you leave the "Client IP" question blank, it will attempt to auto-detect it)
 3. `cd terraform`
 4. `terraform plan`
 5. Check that there are no errors and you're happy with the output
