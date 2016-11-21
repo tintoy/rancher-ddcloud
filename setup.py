@@ -81,8 +81,9 @@ print('=' * 80)
 print('')
 
 print('Detecting client IP...')
-detect_client_ip(local_vars)
 ask_variable(local_vars, 'client_ip', 'Client IP address')
+if not local_vars['client_ip']:
+  detect_client_ip(local_vars)
 ask_variable(local_vars, 'ssh_public_key_file', 'SSH public key file')
 ask_variable(local_vars, 'ssh_bootstrap_password', 'SSH bootstrap password file')
 
