@@ -1,7 +1,5 @@
 provider "ddcloud" {
-	region					= "AU"
-	
-	auto_create_tag_keys	= true
+	region  = "AU"
 }
 
 #################
