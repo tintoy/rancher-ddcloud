@@ -15,3 +15,13 @@ resource "ddcloud_vlan" "primary" {
 
 	networkdomain		= "${ddcloud_networkdomain.rancher.id}"
 }
+
+# IP address list for client machines
+resource "ddcloud_address_list" "clients" {
+	name			= "Clients"
+	ip_version		= "IPv4"
+
+	addresses		= [ "${var.client_ip}" ]
+
+	networkdomain	= "${ddcloud_networkdomain.rancher.id}"
+}

@@ -48,7 +48,7 @@ resource "ddcloud_firewall_rule" "rancher_host_ssh_in" {
 	ip_version			= "ipv4"
 	protocol			= "tcp"
 
-	source_address		= "${var.client_ip}"
+	source_address_list	= "${ddcloud_address_list.clients.id}"
 
 	destination_address	= "${ddcloud_nat.rancher_host.public_ipv4}"
 	destination_port	= 22 # SSH
@@ -64,7 +64,7 @@ resource "ddcloud_firewall_rule" "rancher_host_ui_in" {
 	ip_version			= "ipv4"
 	protocol			= "tcp"
 
-	source_address		= "${var.client_ip}"
+	source_address_list	= "${ddcloud_address_list.clients.id}"
 
 	destination_address	= "${ddcloud_nat.rancher_host.public_ipv4}"
 	destination_port	= 8080 # Rancher UI

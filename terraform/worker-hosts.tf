@@ -58,7 +58,7 @@ resource "ddcloud_firewall_rule" "worker_ssh_in" {
 	ip_version					= "ipv4"
 	protocol					= "tcp"
 
-	source_address				= "${var.client_ip}"
+	source_address_list			= "${ddcloud_address_list.clients.id}"
 
 	destination_address_list	= "${ddcloud_address_list.workers.id}"
 	destination_port			= 22 # SSH

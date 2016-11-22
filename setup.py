@@ -48,6 +48,26 @@ def show_config(variables):
     print('SSH bootstrap password = "{}"'.format(
       variables['ssh_bootstrap_password'])
     )
+  if 'dns_domain_name' in variables:
+    print('Top-level domain name = "{}"'.format(
+      variables['dns_domain_name'])
+    )
+  if 'dns_subdomain_name' in variables:
+    print('Sub-domain name = "{}"'.format(
+      variables['dns_subdomain_name'])
+    )
+  if 'dns_hosted_zone_id' in variables:
+    print('AWS DNS hosted zone Id = "{}"'.format(
+      variables['dns_hosted_zone_id'])
+    )
+  if 'aws_access_key' in variables:
+    print('AWS access key = "{}"'.format(
+      variables['aws_access_key'])
+    )
+  if 'aws_secret_key' in variables:
+    print('AWS secret key = "{}"'.format(
+      variables['aws_secret_key'])
+    )
 
 def ask_variable(variables, key, prompt):
   value = raw_input('{} (currently "{}"): '.format(
@@ -86,6 +106,11 @@ if 'client_ip' not in local_vars:
   detect_client_ip(local_vars)
 ask_variable(local_vars, 'ssh_public_key_file', 'SSH public key file')
 ask_variable(local_vars, 'ssh_bootstrap_password', 'SSH bootstrap password file')
+ask_variable(local_vars, 'dns_domain_name', 'Top-level domain name')
+ask_variable(local_vars, 'dns_subdomain_name', 'Sub-domain name')
+ask_variable(local_vars, 'dns_hosted_zone_id', 'AWS DNS hosted zone Id')
+ask_variable(local_vars, 'aws_access_key', 'AWS access key')
+ask_variable(local_vars, 'aws_secret_key', 'AWS secret key')
 
 save_config(local_vars)
 
