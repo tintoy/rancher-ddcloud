@@ -6,10 +6,10 @@ provider "ddcloud" {
 # Local variables
 #
 # Run setup.py to generate local-vars.json (where these values are supplied).
-
-variable "client_ip" 				{ }
-variable "ssh_public_key_file"		{ }
-variable "ssh_bootstrap_password"	{ }
+#
+# variable "client_ip" 				{ }
+# variable "ssh_public_key_file"		{ }
+# variable "ssh_bootstrap_password"	{ }
 
 #########
 # Globals

@@ -7,9 +7,16 @@ provider "aws" {
 	secret_key = "${var.aws_secret_key}"
 }
 
-variable "dns_domain_name"			{ }
-variable "dns_subdomain_name"		{ }
-variable "dns_hosted_zone_id"		{ }
+#################
+# Local variables
+#
+# Run setup.py to generate local-vars.json (where these values are supplied).
+#
+# variable "dns_domain_name"		{ }
+# variable "dns_subdomain_name"	{ }
+# variable "dns_hosted_zone_id"	{ }
+# variable "aws_access_key"		{ }
+# variable "aws_secret_key"		{ }
 
 # Rancher
 resource "aws_route53_record" "rancher_host" {
