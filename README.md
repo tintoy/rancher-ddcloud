@@ -15,10 +15,12 @@ To deploy, you will need:
 It might work on Windows, but I haven't tested it. If you have problems, try using Windows 10's Ubuntu on Windows feature or a Linux VM
 * An SSH private / public key pair (e.g. `id_rsa` / `id_rsa.pub`)
 * Your CloudControl credentials configured in the `MCP_USER` and `MCP_PASSWORD` environment variables
-* A tag key called "roles" defined in CloudControl.
+* A tag key called "roles" defined in CloudControl 
 
 1. Edit [terraform/main.tf](terraform/main.tf) to configure target data center, etc
-2. Run `./setup.py` (if you leave the "Client IP" question blank, it will attempt to auto-detect it)
+2. Run `./setup.py` (if you leave the "Client IP" question blank, it will attempt to auto-detect it)  
+Note that if you're running these scripts on a server within an MCP network domain, then you may have difficulty contacting ifconfig.co and so you will want to explicitly specify network domain's SNAT (source NAT) address as the client IP:  
+![S/NAT IP](docs/images/SNAT.png)
 3. `cd terraform`
 4. `terraform plan`
 5. Check that there are no errors and you're happy with the output
