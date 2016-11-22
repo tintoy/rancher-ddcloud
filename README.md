@@ -15,7 +15,9 @@ To deploy, you will need:
 It might work on Windows, but I haven't tested it. If you have problems, try using Windows 10's Ubuntu on Windows feature or a Linux VM
 * An SSH private / public key pair (e.g. `id_rsa` / `id_rsa.pub`)
 * Your CloudControl credentials configured in the `MCP_USER` and `MCP_PASSWORD` environment variables
-* A tag key called "roles" defined in CloudControl 
+* A tag key called "roles" defined in CloudControl
+* A DNS service hosted in AWS Route 53   
+*Note* - if you don't want DNS, then just delete `terraform/dns.tf`. 
 
 1. Edit [terraform/main.tf](terraform/main.tf) to configure target data center, etc
 2. Run `./setup.py` (if you leave the "Client IP" question blank, it will attempt to auto-detect it)  
