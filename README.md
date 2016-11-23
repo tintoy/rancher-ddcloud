@@ -71,6 +71,27 @@ To enable the `ddcloud` driver:
 
 ## Troubleshooting
 
+### If you have trouble running Ansible
+
+#### Ansible says "access denied" when trying to connnect to a newly-deployed server
+
+Try connecting to the host manually to see if you get a more informative error message:
+
+```bash
+ssh root@host_ip
+```
+
+If SSH prompts you for a password, this means the host doesn't recognise your default key as authorised to connect.
+Press `Ctrl-C`, and then run:
+
+```bash
+ssh -i x/y/x/id_rsa root@host_ip
+```
+
+Where `x/y/z/id_rsa` is the folder where your SSH key is located (same path supplied to the question in `setup.py` but without the `.pub` on the end).
+
+### If you already have Rancher deployed
+
 1. `ssh root@<rancher-host-public-ip>`
 2. `docker logs -f rancher-server`
 
