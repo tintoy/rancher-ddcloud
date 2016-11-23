@@ -46,7 +46,18 @@ Note that the deployment process added a new SSH keypair to the Rancher containe
 
 If you're in a hurry, step 11 is optional, but you're probably better off working with up-to-date packages :)
 
-### generic driver for Docker Machine
+### Adding hosts
+
+You'll now want to add a couple of hosts to Rancher so you can deploy environments.
+
+1. Go to Environments, then Manage environments.
+2. Click the pen on the right of the row for the default environment.
+3. Pick your orchestrator at the top of the page.  
+If you're not that comfortable with Docker or orchestration yet, try Cattle or Swarm.
+
+For more information, see the [Rancher documentation on hosts](http://docs.rancher.com/rancher/v1.2/en/hosts/).
+
+#### generic driver for Docker Machine
 
 (AF: sorry, haven't automated this yet)
 
@@ -60,7 +71,7 @@ To use the `generic` driver:
 6. `exit`
 7. From the `ansible` directory, run `ansible all -m authorized_key -a 'user=root key="<pasted-SSH-public-key>"'`
 
-### ddcloud driver for Docker Machine
+#### ddcloud driver for Docker Machine
 
 To enable the `ddcloud` driver:
 
@@ -68,6 +79,10 @@ To enable the `ddcloud` driver:
 2. In "Download URL", enter `https://azuretesting2.blob.core.windows.net/public/docker-machine-driver-ddcloud` then click Create.
 3. You can now go back to Infrastructure then Hosts
 4. If the hosts are being deployed onto the same VLAN as the Rancher host, make sure to the `usePrivateIp` checkbox is checked for each host you add.
+
+## Now what?
+
+For more information, see the [Rancher quick-start guide](http://docs.rancher.com/rancher/v1.2/en/quick-start-guide/#create-a-container-through-ui).
 
 ## Troubleshooting
 
