@@ -5,6 +5,11 @@
   roles:
     - common
 
+- hosts: role=storage
+  roles:
+    - storage-volume
+    - docker
+
 - hosts: role=rancher,role=worker
   roles:
     - docker

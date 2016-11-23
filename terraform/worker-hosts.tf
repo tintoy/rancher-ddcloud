@@ -9,7 +9,7 @@ resource "ddcloud_server" "worker" {
 	auto_start				= true
 
 	memory_gb				= 8
-	cpu_count				= 2
+	cpu_count				= 4
 	cpu_speed				= "STANDARD"
 	cores_per_cpu			= 1
 

@@ -1,0 +1,31 @@
+---
+- name: data volume group
+  lvg:
+    vg: data
+    pvs: "{{ initial_data_volume }}"
+    state: present
+
+- name: convoy volume
+  lvol:
+    lv: convoy
+    vg: data
+    size: "{{ convoy_volume_size }}"
+    state: present
+
+- name: convoy filesystem
+  filesystem:
+    dev: /dev/data/convoy
+    fstype: ext4
+
+- name: convoy mount-point
+  file:
+    dest: /data/convoy
+    mode: 0777 # Dodgy - FIXME!
+    state: directory
+
+- name: convoy mount
+  mount:
+    name: /data/convoy
+    src: /dev/data/convoy
+    fstype: ext4
+    state: mounted

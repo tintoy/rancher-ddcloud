@@ -16,7 +16,7 @@
     image: rancher/server:v{{rancher_version}}
     detach: True
     network_mode: bridge
-    restart_policy: on-failure
+    restart_policy: unless-stopped
     published_ports:
       - 8080:8080
 
