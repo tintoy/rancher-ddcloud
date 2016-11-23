@@ -36,6 +36,24 @@ resource "aws_route53_record" "rancher_host_node" {
     records = ["${ddcloud_server.rancher_host.primary_adapter_ipv4}"]   
 }
 
+# Storage
+resource "aws_route53_record" "storage_host" {
+	type    = "A"
+    ttl     = 60
+    zone_id = "${var.dns_hosted_zone_id}"
+
+    name    = "storage.${var.dns_subdomain_name}.${var.dns_domain_name}"
+    records = ["${ddcloud_nat.storage_host.public_ipv4}"]   
+}
+resource "aws_route53_record" "storage_host_node" {
+	type    = "A"
+    ttl     = 60
+    zone_id = "${var.dns_hosted_zone_id}"
+
+    name    = "storage.node.${var.dns_subdomain_name}.${var.dns_domain_name}"
+    records = ["${ddcloud_server.storage_host.primary_adapter_ipv4}"]   
+}
+
 # Workers
 resource "aws_route53_record" "worker" {
 	type    = "A"

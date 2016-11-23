@@ -5,6 +5,16 @@
   roles:
     - common
 
+- hosts: role=storage
+  vars:
+    nfs_allow_network: "10.0.12.0/24"
+    nfs_exports:
+      - "/data/convoy {{ nfs_allow_network }}(rw,fsid=0,insecure,no_subtree_check,async)"
+  roles:
+    - storage-volume
+    - nfs
+    - docker
+
 - hosts: role=rancher,role=worker
   roles:
     - docker

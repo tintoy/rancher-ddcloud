@@ -67,7 +67,23 @@ resource "ddcloud_firewall_rule" "rancher_host_ui_in" {
 	source_address_list	= "${ddcloud_address_list.clients.id}"
 
 	destination_address	= "${ddcloud_nat.rancher_host.public_ipv4}"
-	destination_port	= 8080 # Rancher UI
+	destination_port	= 8080 # Rancher UI (HTTP)
+
+	networkdomain		= "${ddcloud_networkdomain.rancher.id}"
+}
+resource "ddcloud_firewall_rule" "rancher_host_ui_ssl_in" {
+	name				= "rancher.host.ui.ssl.inbound"
+	placement			= "first"
+	action				= "accept"
+	enabled				= true
+
+	ip_version			= "ipv4"
+	protocol			= "tcp"
+
+	source_address_list	= "${ddcloud_address_list.clients.id}"
+
+	destination_address	= "${ddcloud_nat.rancher_host.public_ipv4}"
+	destination_port	= 8443 # Rancher UI (HTTPS)
 
 	networkdomain		= "${ddcloud_networkdomain.rancher.id}"
 }

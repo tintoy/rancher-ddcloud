@@ -1,0 +1,7 @@
+---
+
+# The initial physical volume used to create the data volume group. 
+initial_data_volume: "/dev/sdb"
+
+# The size of the data/convoy logical volume.
+convoy_volume_size: "40g"
