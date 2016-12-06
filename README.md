@@ -20,31 +20,32 @@ It might work on Windows, but I haven't tested it. If you have problems, try usi
 *Note* - if you don't want DNS, just delete `terraform/dns.tf` and you're good to go. 
 
 1. Edit [terraform/main.tf](terraform/main.tf) to configure target data center, etc
-2. Run `./setup.py` (if you leave the "Client IP" question blank, it will attempt to auto-detect it)  
+2. If you're not using AWS Route 53, delete `terraform/dns.tf`.
+3. Run `./setup.py` (if you leave the "Client IP" question blank, it will attempt to auto-detect it)  
 Note that if you're running these scripts on a server within an MCP network domain, then you may have difficulty contacting ifconfig.co and so you will want to explicitly specify network domain's SNAT (source NAT) address as the client IP:  
 ![S/NAT IP](docs/images/SNAT.png)
-3. `cd terraform`
-4. `terraform plan`
-5. Check that there are no errors and you're happy with the output
-6. `terraform apply`
-7. `terraform refresh`
-8. `terraform output`
-9. Note the Rancher and worker host IPs.
-10. `cd ../ansible`
-11. `ansible-playbook playbooks/upgrade-packages.yml`
-12. `ansible-playbook rancher-ddcloud.yml`
-13. Open your web browser and navigate to `http://<rancher-host-public-ip>:8080/`
-14. Secure your installation of Rancher by going to Admin, then Access-Control, then Local Security
-15. Go to Default, then Manage Environments, then click the pencil next to the default environment; choose Kubernetes and press save
-15. You can now go to Infrastructure, then Hosts, then Add Hosts.
-16. Choose "Something Else", and enter `http://<rancher-host-private-ip>:8080`
-17. Choose your orchestrator and either:
+4. `cd terraform`
+5. `terraform plan`
+6. Check that there are no errors and you're happy with the output
+7. `terraform apply`
+8. `terraform refresh`
+9. `terraform output`
+10. Note the Rancher and worker host IPs.
+11. `cd ../ansible`
+12. `ansible-playbook playbooks/upgrade-packages.yml`
+13. `ansible-playbook rancher-ddcloud.yml`
+14. Open your web browser and navigate to `http://<rancher-host-public-ip>:8080/`
+15. Secure your installation of Rancher by going to Admin, then Access-Control, then Local Security
+16. Go to Default, then Manage Environments, then click the pencil next to the default environment; choose Kubernetes and press save
+17. You can now go to Infrastructure, then Hosts, then Add Hosts.
+18. Choose "Something Else", and enter `http://<rancher-host-private-ip>:8080`
+19. Choose your orchestrator and either:
   1. Add existing servers (such as the workers created by this example) using the `generic` driver
   2. Add new servers using the `ddcloud` driver
 
 Note that the deployment process added a new SSH keypair to the Rancher container (`/id_rsa` and `/id_rsa.pub`) that can be used by the various Docker Machine drivers.
 
-If you're in a hurry, step 11 is optional, but you're probably better off working with up-to-date packages :)
+If you're in a hurry, step 12 is optional, but you're probably better off working with up-to-date packages :)
 
 ### Adding hosts
 
