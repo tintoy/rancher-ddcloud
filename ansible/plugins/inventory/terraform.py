@@ -157,9 +157,9 @@ def ddcloud_server(resource, module_name):
         'tags': tags,
 
         # ansible
-        'ansible_ssh_host': raw_attrs['public_ipv4'],
-        'ansible_ssh_port': 22,
-        'ansible_ssh_user': 'root',  # it's "root" (not "centos") on CloudControl
+        'ansible_ssh_host': tags.get('ansible_ssh_host', raw_attrs['public_ipv4']),
+        'ansible_ssh_port': int(tags.get('ansible_ssh_port', '22'))
+        'ansible_ssh_user': tags.get('ansible_ssh_user', 'root'),
 
         # generic
         'private_ipv4': raw_attrs['primary_adapter_ipv4'],
