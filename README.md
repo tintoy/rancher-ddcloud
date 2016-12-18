@@ -9,7 +9,7 @@ Cattle, Swarm, and Kubernetes have been verified to work.
 To deploy, you will need:
 
 * Terraform v0.7 or higher
-* Terraform [ddcloud](https://github.com/DimensionDataResearch/dd-cloud-compute-terraform) provider [v1.1.3 or higher](https://github.com/DimensionDataResearch/dd-cloud-compute-terraform/releases/)
+* Terraform [ddcloud](https://github.com/DimensionDataResearch/dd-cloud-compute-terraform) provider [v1.2 or higher](https://github.com/DimensionDataResearch/dd-cloud-compute-terraform/releases/)
 * Ansible v2.0 or higher
 * An OSX or Linux client machine  
 It might work on Windows, but I haven't tested it. If you have problems, try using Windows 10's Ubuntu on Windows feature or a Linux VM

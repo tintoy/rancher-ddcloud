@@ -14,8 +14,11 @@ resource "ddcloud_server" "storage_host" {
 	cores_per_cpu			= 1
 
 	networkdomain			= "${ddcloud_networkdomain.rancher.id}"
-	primary_adapter_vlan	= "${ddcloud_vlan.primary.id}"
-	primary_adapter_ipv4	= "${cidrhost(var.primary_network, 30)}"
+	
+	primary_network_adapter {
+		vlan				= "${ddcloud_vlan.primary.id}"
+		ipv4				= "${cidrhost(var.primary_network, 30)}"
+	}
 
 	dns_primary				= "8.8.8.8"
 	dns_secondary			= "8.8.4.4"
@@ -32,7 +35,7 @@ resource "ddcloud_server" "storage_host" {
 		speed				= "STANDARD"
 	}
 
-	os_image_name			= "Ubuntu 14.04 2 CPU"
+	image					= "Ubuntu 14.04 2 CPU"
 
 	tag {
 		name                = "roles"
