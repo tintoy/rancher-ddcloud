@@ -29,7 +29,7 @@ variable_description_max = max(
 
 def load_config():
     local_vars['ssh_public_key_file'] = path.join(
-        os.getenv('HOME'), ".ssh/id_rsa"
+        os.getenv('HOME'), ".ssh/id_rsa.pub"
     )
 
     try:

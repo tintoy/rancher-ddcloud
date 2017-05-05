@@ -15,7 +15,7 @@ provider "ddcloud" {
 # Globals
 
 # Target datacenter
-variable "datacenter" 				{ default = "AU10" }
+variable "datacenter" 				{ default = "AU9" }
 
 # Number of worker hosts
 variable "worker_count"				{ default = 3 }

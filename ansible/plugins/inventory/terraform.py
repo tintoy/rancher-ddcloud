@@ -158,7 +158,7 @@ def ddcloud_server(resource, module_name):
 
         # ansible
         'ansible_ssh_host': tags.get('ansible_ssh_host', raw_attrs['public_ipv4']),
-        'ansible_ssh_port': int(tags.get('ansible_ssh_port', '22'))
+        'ansible_ssh_port': int(tags.get('ansible_ssh_port', '22')),
         'ansible_ssh_user': tags.get('ansible_ssh_user', 'root'),
 
         # generic
