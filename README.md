@@ -106,6 +106,12 @@ ssh -i x/y/x/id_rsa root@host_ip
 
 Where `x/y/z/id_rsa` is the folder where your SSH key is located (same path supplied to the question in `setup.py` but without the `.pub` on the end).
 
+If your SSH key requires a passphrase then to prevent connection errors even though you get prompted its best to add the key to the SSH agent using the following two commands:
+
+```ssh-agent bash
+ssh-add ~/.ssh/id_rsa
+```
+
 ### If you already have Rancher deployed
 
 1. `ssh root@<rancher-host-public-ip>`
