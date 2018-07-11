@@ -106,6 +106,11 @@ ssh -i x/y/x/id_rsa root@host_ip
 
 Where `x/y/z/id_rsa` is the folder where your SSH key is located (same path supplied to the question in `setup.py` but without the `.pub` on the end).
 
+If Ansible connection prompts for SSH private key passphrase then its best to add the key to the agent using the following commands:
+```ssh-agent bash
+ssh-add ~/.ssh/id_rsa
+```
+
 ### If you already have Rancher deployed
 
 1. `ssh root@<rancher-host-public-ip>`
